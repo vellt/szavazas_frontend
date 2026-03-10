@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
 import { regisztracio } from "../api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function RegistrationPage(){
     const navigation= useNavigate();
@@ -37,6 +37,9 @@ export default function RegistrationPage(){
                             navigation('/login')
                         }
                     }}/>
+                </div>
+                <div className="text-center mt-3">
+                    <Link to="/login" className="text-dark text-decoration-none">Van fiókom</Link>
                 </div>
             </div>
         </div>
