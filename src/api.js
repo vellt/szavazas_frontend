@@ -23,3 +23,22 @@ export async function belepes(felhasznalonevVagyEmail, jelszo){
     if(!res.ok) return {result: false, message: data.message};
     else return {result: true, message: data.message};
 }
+
+export async function adataim(){
+    const res = await fetch(`${BASE}/adataim`, {
+        credentials: 'include',
+    })
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, user: data};
+}
+
+export async function kijelentkezes(){
+    const res = await fetch(`${BASE}/kijelentkezes`, {
+        method: 'POST',
+        credentials: 'include',
+    })
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
