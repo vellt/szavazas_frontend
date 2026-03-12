@@ -14,8 +14,12 @@ export default function Navbar({user}) {
                     <a className="navbar-brand" href="#">Szavazás</a>
                     <div className="d-flex ">
                         <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Szavazás</Link>
-                        <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Képeim</Link>
-                        <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Fiókom</Link>
+                        {
+                            isLoggedIn && (<Link to='/' className="px-3 text-decoration-none py-1 text-dark">Képeim</Link>)
+                        }
+                        {
+                            isLoggedIn && (<Link to='/profile' className="px-3 text-decoration-none py-1 text-dark">Fiókom</Link>)
+                        }
                         {
                             isAdmin && (<Link to='/' className="px-3 text-decoration-none py-1 text-dark">Admin Panel</Link>)
                         }
