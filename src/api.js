@@ -33,6 +33,53 @@ export async function adataim(){
     else return {result: true, user: data};
 }
 
+export async function emailModositas(ujEmail){
+    console.log(ujEmail);
+    const res = await fetch(`${BASE}/email`, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ujEmail})
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
+export async function felhasznalonevModositas(ujFelhasznalonev){
+    const res = await fetch(`${BASE}/felhasznalonev`, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ujFelhasznalonev})
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
+export async function jelszoModositas(jelenlegiJelszo, ujJelszo){
+    const res = await fetch(`${BASE}/jelszo`, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({jelenlegiJelszo, ujJelszo})
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
+export async function fiokTorlese(){
+    const res = await fetch(`${BASE}/fiokom`, {
+        method: 'DELETE',
+        credentials: 'include',
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
 export async function kijelentkezes(){
     const res = await fetch(`${BASE}/kijelentkezes`, {
         method: 'POST',
