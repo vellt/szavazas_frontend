@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegistrationPage from './pages/RegistrationPage'
 import ProfilePage from './pages/ProfilePage'
+import UploadPage from './pages/UploadPage'
+import ImagesPage from './pages/ImagesPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -14,6 +16,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='/login' element={<LoginPage/>} />
         <Route path='/registration' element={<RegistrationPage/>} />
         <Route path='/profile' element={<ProfilePage/>} />
+        <Route path='/upload' element={<UploadPage/>} />
+        <Route path='/images' element={<ImagesPage/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

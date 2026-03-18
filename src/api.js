@@ -89,3 +89,18 @@ export async function kijelentkezes(){
     if(!res.ok) return {result: false, message: data.message};
     else return {result: true, message: data.message};
 }
+
+export async function kepFeltoltes(file, zsuri){
+    const formData = new FormData();
+    formData.append('kep_neve',file);
+    formData.append('zsuri_id',parseInt(zsuri));
+    const res = await fetch(`${BASE}/kepek`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: formData
+    })
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}

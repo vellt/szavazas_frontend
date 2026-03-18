@@ -3,10 +3,30 @@ import Navbar from "../components/Navbar"
 import Button from '../components/Button'
 import Modal from '../components/Modal'
 import TextBox from '../components/TextBox'
-import { useState } from 'react'
-import { emailModositas, felhasznalonevModositas, fiokTorlese, jelszoModositas } from '../api'
+import { useState, useEffect } from 'react'
+import { adataim, emailModositas, felhasznalonevModositas, fiokTorlese, jelszoModositas } from '../api'
+import { useNavigate } from 'react-router-dom'
 
 export default function ProfilePage() {
+    const [user, setUser] = useState(null)
+    const nav= useNavigate();
+
+    // kérjük le (oldalbetöltéskor) az adataimat és töltsük bele a user állapotváltoztóba!
+    useEffect(() => {
+        (async () => {
+            const data = await adataim();
+            if (data.result) {
+                setUser(data.user)
+            }
+            else {
+                // védett oldalt kivülről ne lehessen elérni
+                // ha valaki nincs belépve a hőoldalra navigálunk!
+                nav('/')
+            }
+        })()
+    }, [])
+
+
     // email modalhoz tartozik
     const [emailOpen, setEmailOpen] = useState(false);
     const [email, setEmail] = useState("");
@@ -30,7 +50,7 @@ export default function ProfilePage() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar user={user}/>
             <div className='d-flex justify-content-center mt-5'>
                 <div>
                     <div className='my-2'>
