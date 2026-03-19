@@ -112,3 +112,22 @@ export async function kepekLekerese(){
     if(!res.ok) return {result: false, message: data.message};
     else return {result: true, images: data};
 }
+
+export async function kepTorlese(kep_neve){
+    const res = await fetch(`${BASE}/kepek`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({kep_neve})
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
+export async function szavazatokLekerese(){
+    const res = await fetch(`${BASE}/szavazatok`);
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, szavazatok: data};
+}
