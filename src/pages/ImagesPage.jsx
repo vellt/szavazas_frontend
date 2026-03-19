@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import Button from "../components/Button"
 import { useNavigate } from "react-router-dom"
+import { adataim } from "../api"
 
 export default function ImagesPage(){
     const [aktivZsuri, setAktivZsuri] = useState("Összes")
@@ -48,7 +49,7 @@ export default function ImagesPage(){
                         }
                     </div>
                     <div>
-                        <Button content={"kép feltöltése"} color={'dark'}/>
+                        <Button content={"kép feltöltése"} color={'dark'} onClick={()=>nav('/upload')}/>
                     </div>
                 </div>
                 {/*Kártyák*/}

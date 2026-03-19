@@ -15,7 +15,7 @@ export default function Navbar({user}) {
                     <div className="d-flex ">
                         <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Szavazás</Link>
                         {
-                            isLoggedIn && (<Link to='/' className="px-3 text-decoration-none py-1 text-dark">Képeim</Link>)
+                            isLoggedIn && (<Link to='/images' className="px-3 text-decoration-none py-1 text-dark">Képeim</Link>)
                         }
                         {
                             isLoggedIn && (<Link to='/profile' className="px-3 text-decoration-none py-1 text-dark">Fiókom</Link>)
