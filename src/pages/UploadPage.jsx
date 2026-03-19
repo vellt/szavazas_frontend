@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from "../components/Navbar"
 import { useState, useEffect } from "react";
 import Button from "../components/Button";
-import { kepFeltoltes } from "../api";
+import { adataim, kepFeltoltes } from "../api";
 
 export default function UploadPage(){
     const nav = useNavigate();
@@ -42,6 +42,9 @@ export default function UploadPage(){
         const data = await kepFeltoltes(file, zsuri);
         console.log(data);
         alert(data.message);
+        if(data.result){
+            nav(-1);
+        }
     }
 
     return (
@@ -70,10 +73,10 @@ export default function UploadPage(){
                 </div>
                 <div className="d-flex gap-2 mt-3">
                     <div className="w-50">
-                        <Button content={"Mégse"} color={'dark'}/>
+                        <Button content={"Mégse"} color={'dark'} onClick={()=>nav(-1)}/>
                     </div>
                     <div className="w-50">
-                        <Button content={"Kép feltöltése"} color={'dark'} onClick={()=>(async()=>await uploadData())()}/>
+                        <Button content={"Kép feltöltése"} color={'dark'} onClick={(async()=>await uploadData())}/>
                     </div>
                 </div>
             </div>

@@ -2,22 +2,14 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import Button from "../components/Button"
 import { useNavigate } from "react-router-dom"
-import { adataim } from "../api"
+import { adataim, kepekLekerese } from "../api"
 
 export default function ImagesPage(){
     const [aktivZsuri, setAktivZsuri] = useState("Összes")
 
-    const adatok = [
-        {id: 1, zsuri: "Curtis", url: "http://localhost:3000/uploads/toth_gabi.png"},
-        {id: 2, zsuri: "Tóth Gabi", url: "http://localhost:3000/uploads/toth_gabi.png"},
-        {id: 3, zsuri: "Marics Peti", url: "http://localhost:3000/uploads/toth_gabi.png"},
-        {id: 4, zsuri: "Curtis", url: "http://localhost:3000/uploads/toth_gabi.png"},
-    ]
-
+    const [adatok, setAdatok] = useState([])
     const zsuriLista = ["Összes", ...new Set(adatok.map(x=>x.zsuri))]
-
     const szurtLista = aktivZsuri === "Összes" ? adatok : adatok.filter(x=>x.zsuri===aktivZsuri)
-
     const [user, setUser] = useState(null)
     const nav= useNavigate();
 
@@ -32,9 +24,20 @@ export default function ImagesPage(){
                 // védett oldalt kivülről ne lehessen elérni
                 // ha valaki nincs belépve a hőoldalra navigálunk!
                 nav('/')
+                //alert('Ezt az oldalt nem éred el, mert nem vagy bejelentkezve!')
+            }
+        })();
+        (async()=>{
+            console.log('hello');
+            const data = await kepekLekerese();
+            console.log(data);
+            if(data.result){
+                setAdatok(data.images)
             }
         })()
     }, [])
+
+    console.log(adatok);
 
     return (
         <div>
@@ -56,9 +59,9 @@ export default function ImagesPage(){
                 <div className="row g-3 mt-3">
                     {
                         szurtLista.map(adat=>(
-                            <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={adat.id}>
+                            <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={adat.kep_neve}>
                                 <div>
-                                    <img src={adat.url} alt="kep" className="w-100" style={{height: "200px", objectFit: "cover"}}/>
+                                    <img src={`http://localhost:3000/uploads/${adat.kep_neve}`} alt="kep" className="w-100" style={{height: "200px", objectFit: "cover"}}/>
                                     <div className="mt-2">
                                         <Button content={"Törlés"} color={"dark"}/>
                                     </div>
