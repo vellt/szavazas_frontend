@@ -131,3 +131,13 @@ export async function szavazatokLekerese(){
     if(!res.ok) return {result: false, message: data.message};
     else return {result: true, szavazatok: data};
 }
+
+export async function szavazatLeadasa(zsuri_id){
+    const res = await fetch(`${BASE}/szavazas/${zsuri_id}`, {
+        method: 'POST',
+        credentials: 'include',
+    })
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
