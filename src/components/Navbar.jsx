@@ -11,7 +11,7 @@ export default function Navbar({user}) {
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid d-flex justify-content-between">
-                    <a className="navbar-brand" href="#">Szavazás</a>
+                    <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Szavazás</Link>
                     <div className="d-flex ">
                         <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Szavazás</Link>
                         {
@@ -21,7 +21,7 @@ export default function Navbar({user}) {
                             isLoggedIn && (<Link to='/profile' className="px-3 text-decoration-none py-1 text-dark">Fiókom</Link>)
                         }
                         {
-                            isAdmin && (<Link to='/' className="px-3 text-decoration-none py-1 text-dark">Admin Panel</Link>)
+                            isAdmin && (<Link to='/admin' className="px-3 text-decoration-none py-1 text-dark">Admin Panel</Link>)
                         }
                         <div className="mx-3">
                             {

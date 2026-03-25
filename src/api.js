@@ -141,3 +141,19 @@ export async function szavazatLeadasa(zsuri_id){
     if(!res.ok) return {result: false, message: data.message};
     else return {result: true, message: data.message};
 }
+
+export async function gyoztesLekerese(){
+    const res = await fetch(`${BASE}/gyoztes`);
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, gyoztes: data};
+}
+
+export async function felhasznalokLekerese(){
+    const res = await fetch(`${BASE}/felhasznalok`, {
+        credentials: 'include'
+    });
+    const data= await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, felhasznalok: data};
+}
