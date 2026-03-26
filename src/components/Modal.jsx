@@ -1,4 +1,4 @@
-export default function Modal({open, title, children, submitText, onClose, onSubmit}) {
+export default function Modal({open, title, children, color, submitText, onClose, onSubmit}) {
     if(!open) return null;
     return (
         <div>
@@ -13,8 +13,8 @@ export default function Modal({open, title, children, submitText, onClose, onSub
                            {children}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={onClose}>Close</button>
-                            {submitText && (<button type="button" className="btn btn-primary" onClick={onSubmit}>{submitText}</button>)}
+                            <button type="button" className="btn btn-secondary" onClick={onClose}>Vissza</button>
+                            {submitText && (<button type="button" className={`btn btn-${color??'primary'}`} onClick={onSubmit}>{submitText}</button>)}
                         </div>
                     </div>
                 </div>

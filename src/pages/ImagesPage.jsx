@@ -75,7 +75,7 @@ export default function ImagesPage(){
                         ))
                     }
                 </div>
-                <Modal open={torlesOpen} title={"Kép törlése"} onClose={() => setTorlesOpen(false)} submitText={"Törlés"} onSubmit={() => {
+                <Modal open={torlesOpen} title={"Kép törlése"} color={'danger'} onClose={() => setTorlesOpen(false)} submitText={"Törlés"} onSubmit={() => {
                     (async () => {
                         const data = await kepTorlese(torlesKep);
                         if(data.result){

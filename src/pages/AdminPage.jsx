@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { adataim, felhasznalokLekerese } from "../api";
+import { adataim, felhasznaloTorleseADMIN, felhasznalokLekerese } from "../api";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import Modal from "../components/Modal";
 
 export default function AdminPage(){
     const [user, setUser] = useState(null)
@@ -59,7 +60,7 @@ export default function AdminPage(){
                                             </select>
                                         </td>
                                         <td>
-                                            <Button color={'danger'} content={'Fiók törlése'}/>
+                                            <Button color={'danger'} content={'Fiók törlése'} />
                                         </td>
                                     </tr>
                                 ))
@@ -68,6 +69,25 @@ export default function AdminPage(){
                     </table>
                 </div>
             </div>
+            <Modal open={torlesOpen} title={"Felhasználó törlése"} color={'danger'} onClose={() => setTorlesOpen(false)} submitText={"Törlés"} onSubmit={() => {
+                (async () => {
+                    const data = await felhasznaloTorleseADMIN();
+                    if(data.result){
+                        setTorlesHiba('');
+                        setTorlesOpen(false);
+                        const data = await felhasznalokLekerese();
+                        if(data.result){
+                            setFelhasznalok(data.felhasznalok)
+                        }
+                    }
+                    else{
+                        setTorlesHiba(data.message);
+                    }
+                })()
+            }}>
+                {torlesHiba && (<div className="alert alert-danger" role="alert">{torlesHiba}</div>)}
+                Gondolt át nagyon a döntésedet! A művelet nem vonható vissza!
+            </Modal>
         </div>
     )
 }

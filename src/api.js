@@ -157,3 +157,26 @@ export async function felhasznalokLekerese(){
     if(!res.ok) return {result: false, message: data.message};
     else return {result: true, felhasznalok: data};
 }
+
+export async function felhasznaloTorleseADMIN(felhasznalo_id){
+    const res = await fetch(`${BASE}/felhasznalo/${felhasznalo_id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
+export async function szerepkorModositasADMIN(felhasznalo_id, szerepkor){
+    const res = await fetch(`${BASE}/szerepkor/${felhasznalo_id}`, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({szerepkor})
+    })
+    const data = await res.json();
+    if(!res.ok) return {result: false, message: data.message};
+    else return {result: true, message: data.message};
+}
+
