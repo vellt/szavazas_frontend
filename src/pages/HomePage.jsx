@@ -37,7 +37,7 @@ export default function HomePage() {
                 <div className="row g-3">
                     {
                         szavazatok.map(item=>(
-                            <div className="col-12 col-lg-6 col-xl-3">
+                            <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
                                 <div>
                                     <div className="bg-light d-flex justify-content-center align-items-center" style={{width: "200px", height: "200px"}}>
                                         <div>{item.zsuri}</div>
