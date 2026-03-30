@@ -31,7 +31,7 @@ export default function WinnerPage(){
             <Navbar user={user}/>
             {
                 !!gyoztes && (
-                    <div className="d-flex justify-content-center mt-5">
+                    <div className="d-flex justify-content-center mt-3">
                         <div>
                             <div style={{width: "230px", height: "330px"}}>
                                 <img src={`http://localhost:3000/uploads/${gyoztes.kep}`} alt="nyertes" className="h-100 w-100" style={{objectFit: "cover"}} />

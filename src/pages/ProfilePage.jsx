@@ -56,8 +56,8 @@ export default function ProfilePage() {
     return (
         <div>
             <Navbar user={user}/>
-            <div className="d-flex justify-content-center mt-5">
-            <div className="card p-4 m-4" style={{ width: "100%", maxWidth: "760px", borderRadius: "16px" }}>
+            <div className="d-flex justify-content-center mt-3">
+            <div className="card p-4 mx-4" style={{ width: "100%", maxWidth: "760px", borderRadius: "16px" }}>
                 
                 <h4 className="text-center mb-3">Profil</h4>
 

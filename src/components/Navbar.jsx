@@ -16,7 +16,7 @@ export default function Navbar({ user }) {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary border">
                 <div className="container-fluid">
                     <Link to="/" className="navbar-brand"> Szavazás </Link>
 

@@ -55,7 +55,7 @@ export default function AdminPage(){
     return (
         <div>
             <Navbar user={user}/>
-            <div className="container mt-5">
+            <div className="container my-3">
                 <div className="border bg-white overflow-x-scroll">
                     <table className="table align-middle m-0">
                         <thead >

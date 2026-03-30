@@ -33,13 +33,13 @@ export default function HomePage() {
     return (
         <div>
             <Navbar user={user} />
-            <div className="d-flex justify-content-center mt-3">
+            <div className="d-flex justify-content-center my-3">
                 <div className="row g-3">
                     {
                         szavazatok.map(item=>(
                             <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
                                 <div>
-                                    <div className="bg-light d-flex justify-content-center align-items-center" style={{width: "300px", height: "300px"}}>
+                                    <div className="bg-light d-flex justify-content-center align-items-center border"  style={{width: "300px", height: "300px",  borderRadius: "16px"}}>
                                         <div>{item.zsuri}</div>
                                     </div>
                                     <div className="d-flex justify-content-between mt-2">
@@ -63,7 +63,7 @@ export default function HomePage() {
                 </div>
             </div>
             <div style={{ position: 'fixed', right: "20px", bottom: "20px", zIndex: 1}}>
-                <Button color={'dark'} content={'Lássuk a győztest'} onClick={()=>nav('/winner')}/>
+                <Button color={'primary'} content={'Lássuk a győztest'} onClick={()=>nav('/winner')}/>
             </div>
         </div>
     )

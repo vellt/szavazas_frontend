@@ -44,7 +44,7 @@ export default function ImagesPage(){
     return (
         <div>
             <Navbar user={user}/>
-            <div className="container mt-3">
+            <div className="container my-3">
                 <div className="d-flex justify-content-between">
                     <div>
                         {
