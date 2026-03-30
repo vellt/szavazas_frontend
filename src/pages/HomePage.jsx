@@ -39,7 +39,7 @@ export default function HomePage() {
                         szavazatok.map(item=>(
                             <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
                                 <div>
-                                    <div className="bg-light d-flex justify-content-center align-items-center" style={{width: "200px", height: "200px"}}>
+                                    <div className="bg-light d-flex justify-content-center align-items-center" style={{width: "300px", height: "300px"}}>
                                         <div>{item.zsuri}</div>
                                     </div>
                                     <div className="d-flex justify-content-between mt-2">

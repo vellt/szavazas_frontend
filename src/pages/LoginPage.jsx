@@ -10,7 +10,7 @@ export default function LoginPage() {
     const navigation= useNavigate();
     return (
         <div className="vh-100 d-flex justify-content-center align-items-center">
-            <div style={{ minWidth: 700 }}>
+            <div style={{ minWidth: 300 }}>
                 <div className="text-center fs-1 mb-5">Bejelentkezés</div>
                 <TextBox title={"E-mail vagy felhasználónév"} type={"text"} placeholder={"expample@example.com vagy user123"} value={usernameOrEmail} setValue={setUsernameOrEmail} />
                 <TextBox title={"Jelszó"} type={"password"} placeholder={"******"} value={jelszo} setValue={setJelszo}/>

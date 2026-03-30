@@ -1,59 +1,80 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { kijelentkezes } from "../api";
-import 'bootstrap/dist/js/bootstrap.esm.js'
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { useState } from "react";
+import Modal from "./Modal";
 
 export default function Navbar({ user }) {
     const navigation = useNavigate();
-    const isLoggedIn = !!user; // user van érték-->true ha a user-ben nincs érték --> false
-    // admin-e?
+    const isLoggedIn = !!user;
     const isAdmin = user?.admin === 1;
+
+    // fiók törlése modal
+    const [kijelentkezesOpen, setKijelentkezesOpen] = useState(false);
+    const [kijekentkezesHiba, setKijelentkezesHiba] = useState("")
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid d-flex justify-content-between">
-                    <Link to='/' className="px-3 text-decoration-none py-1 text-dark">Szavazás</Link>
-                    <div className="d-flex justify-content-end">
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
-                            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="d-flex justify-content-end">
-                            <div className="collapse navbar-collapse " id="navbarsExample04">
-                                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                                    <li class="nav-item d-flex align-items-center"><Link to='/' className="px-3 text-decoration-none py-1 text-dark">Szavazás</Link></li>
-                                    {
-                                        isLoggedIn && (<li class="nav-item d-flex align-items-center"><Link to='/images' className="px-3 text-decoration-none py-1 text-dark">Képeim</Link></li>)
-                                    }
-                                    {
-                                        isLoggedIn && (<li class="nav-item d-flex align-items-center"><Link to='/profile' className="px-3 text-decoration-none py-1 text-dark">Fiókom</Link></li>)
-                                    }
-                                    {
-                                        isAdmin && (<li class="nav-item d-flex align-items-center"><Link to='/admin' className="px-3 text-decoration-none py-1 text-dark">Admin Panel</Link></li>)
-                                    }
-                                    <div className="mx-3">
-                                        {
-                                            isLoggedIn ? (<Button content={"Kijelentkezés"} color={'dark'} onClick={async () => {
-                                                const data = await kijelentkezes();
-                                                console.log(data.result);
-                                                if (!data.result) {
-                                                    alert(data.message)
-                                                } else {
-                                                    navigation('/')
-                                                    window.location.reload();
-                                                }
-                                            }} />)
-                                                : (<Button content={"Bejelentkezés"} color={'dark'} onClick={() => navigation("/login")} />)
-                                        }
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div className="container-fluid">
+                    <Link to="/" className="navbar-brand"> Szavazás </Link>
 
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="navbarsExample04">
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link to="/" className="nav-link"> Szavazás </Link>
+                            </li>
+
+                            {isLoggedIn && (
+                                <li className="nav-item">
+                                    <Link to="/images" className="nav-link"> Képeim </Link>
+                                </li>
+                            )}
+
+                            {isLoggedIn && (
+                                <li className="nav-item">
+                                    <Link to="/profile" className="nav-link"> Fiókom </Link>
+                                </li>
+                            )}
+
+                            {isAdmin && (
+                                <li className="nav-item">
+                                    <Link to="/admin" className="nav-link"> Admin Panel </Link>
+                                </li>
+                            )}
+
+                            <li className="nav-item d-flex align-items-center ms-lg-3">
+                                {isLoggedIn ? (
+                                    <Button content="Kijelentkezés" color="dark" onClick={() => setKijelentkezesOpen(true)}
+                                    />
+                                ) : (
+                                    <Button content="Bejelentkezés" color="dark" onClick={() => navigation("/login")} />
+                                )}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
+            <Modal open={kijelentkezesOpen} title={"Kijelentkezés"} color={'warning'} onClose={() => setKijelentkezesOpen(false)} submitText={"Kijelentkezés"} onSubmit={() => {
+                (async () => {
+                    const data = await kijelentkezes();
+                    console.log(data.result);
+                    if (!data.result) {
+                        setKijelentkezesHiba(data.message);
+                    } else {
+                        navigation("/");
+                        window.location.reload();
+                    }
+                })()
+            }}>
+                {kijekentkezesHiba && (<div className="alert alert-danger" role="alert">{kijekentkezesHiba}</div>)}
+                Biztos ki szeretne jelentkezni?
+            </Modal>
         </div>
-    )
+    );
 }
-

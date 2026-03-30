@@ -17,6 +17,8 @@ export default function ProfilePage() {
             const data = await adataim();
             if (data.result) {
                 setUser(data.user)
+                setEmail(data.user.email)
+                setFelhasznalonev(data.user.felhasznalonev)
             }
             else {
                 // védett oldalt kivülről ne lehessen elérni
@@ -26,10 +28,13 @@ export default function ProfilePage() {
         })()
     }, [])
 
+    console.log(user);
+    
+
 
     // email modalhoz tartozik
     const [emailOpen, setEmailOpen] = useState(false);
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(null);
     const [emailHiba, setEmailHiba] = useState("")
 
     // felhasználónév modalhoz tartozik
@@ -51,22 +56,43 @@ export default function ProfilePage() {
     return (
         <div>
             <Navbar user={user}/>
-            <div className='d-flex justify-content-center mt-5'>
-                <div>
-                    <div className='my-2'>
-                        <Button color={'dark'} content={'Email módosítása'} onClick={() => setEmailOpen(true)} />
+            <div className="d-flex justify-content-center mt-5">
+            <div className="card p-4 m-4" style={{ width: "100%", maxWidth: "760px", borderRadius: "16px" }}>
+                
+                <h4 className="text-center mb-3">Profil</h4>
+
+                <div className="mb-3">
+                    <div className="d-flex justify-content-between">
+                        <span className="fw-semibold">Felhasználónév:</span>
+                        <span>{felhasznalonev}</span>
                     </div>
-                    <div className='my-2'>
-                        <Button color={'dark'} content={'Felhasználónév módosítása'} onClick={() => setFelhasznalonevOpen(true)} />
+
+                    <div className="d-flex justify-content-between">
+                        <span className="fw-semibold">Email:</span>
+                        <span>{email}</span>
                     </div>
-                    <div className='my-2'>
-                        <Button color={'dark'} content={'Jelszó módosítása'} onClick={() => setJelszoOpen(true)} />
-                    </div>
-                    <div className='my-2'>
-                        <Button color={'danger'} content={'Fiók törlése'} onClick={() => setTorlesOpen(true)} />
+
+                    <div className="d-flex justify-content-between">
+                        <span className="fw-semibold">Szerep:</span>
+                        <span className={`badge ${user?.admin === 1 ? "bg-danger" : "bg-secondary"}`}>
+                            {user?.admin === 1 ? "Admin" : "Felhasználó"}
+                        </span>
                     </div>
                 </div>
+
+                <hr />
+
+                <div className="d-grid gap-2">
+                    <Button color="white" content="Email módosítása" onClick={() => setEmailOpen(true)} />
+
+                    <Button color="white" content="Felhasználónév módosítása" onClick={() => setFelhasznalonevOpen(true)} />
+
+                    <Button color="white" content="Jelszó módosítása" onClick={() => setJelszoOpen(true)} />
+
+                    <Button color="danger" content="Fiók törlése" onClick={() => setTorlesOpen(true)} />
+                </div>
             </div>
+        </div>
             {/* Email módosítás */}
             <Modal open={emailOpen} title={"Email módosítása"} onClose={() => setEmailOpen(false)} submitText={"Módosítás"} onSubmit={() => {
                 (async () => {
@@ -76,8 +102,8 @@ export default function ProfilePage() {
                     }
                     else {
                         setEmailHiba('');
-                        setEmail('');
                         setEmailOpen(false);
+
                     }
                 })()
             }}>
@@ -94,7 +120,6 @@ export default function ProfilePage() {
                     }
                     else {
                         setFelhasznalonevHiba('');
-                        setFelhasznalonev('');
                         setFelhasznalonevOpen(false);
                     }
                 })()
@@ -130,7 +155,7 @@ export default function ProfilePage() {
             </Modal>
 
             {/* fiók törlés */}
-            <Modal open={torlesOpen} title={"Fiók törlése"} onClose={() => setTorlesOpen(false)} submitText={"Törlés"} onSubmit={() => {
+            <Modal open={torlesOpen} title={"Fiók törlése"} color={'danger'} onClose={() => setTorlesOpen(false)} submitText={"Törlés"} onSubmit={() => {
                 (async () => {
                     const res = await fiokTorlese();
                     if (!res.result) {

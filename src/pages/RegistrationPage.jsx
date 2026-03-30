@@ -15,7 +15,7 @@ export default function RegistrationPage(){
 
     return (
         <div className="vh-100 d-flex justify-content-center align-items-center">
-            <div style={{minWidth: 700}}>
+            <div style={{minWidth: 300}}>
                 <div className="text-center fs-1 mb-5">Regisztráció</div>
                 <TextBox title={"E-mail"} type={"email"} placeholder={"expample@example.com"} value={email} setValue={setEmail}/>
                 <TextBox title={"Felhasználónév"} type={"text"} placeholder={"John Doe"} value={felhasznalonev} setValue={setFelhasznalonev}/>
