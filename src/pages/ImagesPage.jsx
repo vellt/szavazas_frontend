@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import Button from "../components/Button"
 import { useNavigate } from "react-router-dom"
-import { adataim, kepTorlese, kepekLekerese } from "../api"
+import { BASE, adataim, kepTorlese, kepekLekerese } from "../api"
 import Modal from "../components/Modal"
 
 export default function ImagesPage(){
@@ -63,7 +63,7 @@ export default function ImagesPage(){
                         szurtLista.map(adat=>(
                             <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={adat.kep_neve}>
                                 <div>
-                                    <img src={`http://localhost:3000/uploads/${adat.kep_neve}`} alt="kep" className="w-100" style={{height: "200px", objectFit: "cover"}}/>
+                                    <img src={`${BASE}/uploads/${adat.kep_neve}`} alt="kep" className="w-100" style={{height: "200px", objectFit: "cover"}}/>
                                     <div className="mt-2">
                                         <Button content={"Törlés"} color={"dark"} onClick={()=>{
                                             setTorlesKep(adat.kep_neve)

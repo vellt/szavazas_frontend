@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { adataim, gyoztesLekerese } from "../api";
+import { adataim, BASE, gyoztesLekerese } from "../api";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ export default function WinnerPage(){
             const data = await gyoztesLekerese();
             if(data.result){
                 setGyoztes(data.gyoztes)
+                console.log(data.gyoztes);
             }else{
                 alert(data.message)
             }
@@ -34,7 +35,7 @@ export default function WinnerPage(){
                     <div className="d-flex justify-content-center mt-3">
                         <div>
                             <div style={{width: "230px", height: "330px"}}>
-                                <img src={`http://localhost:3000/uploads/${gyoztes.kep}`} alt="nyertes" className="h-100 w-100" style={{objectFit: "cover"}} />
+                                <img src={`${BASE}/uploads/${gyoztes.kep}`} alt="nyertes" className="h-100 w-100" style={{objectFit: "cover"}} />
                             </div>
                             <div className="d-flex justify-content-between">
                                 <div>
